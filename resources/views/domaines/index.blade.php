@@ -52,15 +52,12 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
+                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
                                             @can('edit domaines')
-                                                <a href="{{ route('domaines.edit', $domaine->id) }}"
-                                                    class="px-3 py-2 text-white rounded-sm bg-slate-700 hover:bg-slate-600">Edit</a>
+                                                <x-buttons.edit-button :route="route('domaines.edit', $domaine->id)" />
                                             @endcan
                                             @can('delete domaines')
-                                                <a href="javascript:void(0);"
-                                                    class="px-3 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
-                                                    onclick="deleteDomaine({{ $domaine->id }})">Delete</a>
+                                                <x-buttons.delete-button :id="$domaine->id" functionName="deleteDomaine" />
                                             @endcan
                                         </td>
                                     </tr>

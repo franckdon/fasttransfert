@@ -62,16 +62,13 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
+                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
 
                                             @can('edit reglements')
-                                                <a href="{{ route('reglements.edit', $reglement->id) }}"
-                                                    class="px-3 py-2 text-white rounded-sm bg-slate-700 hover:bg-slate-600">Edit</a>
+                                                <x-buttons.edit-button :route="route('reglements.edit', $reglement->id)" />
                                             @endcan
                                             @can('delete reglements')
-                                                <a href="javascript:void(0);"
-                                                    class="px-3 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
-                                                    onclick="deleteReglement({{ $reglement->id }})">Delete</a>
+                                                <x-buttons.delete-button :id="$reglement->id" functionName="deleteReglement" />
                                             @endcan
 
                                             <a href="{{ route('questions.index', $reglement->id) }}"

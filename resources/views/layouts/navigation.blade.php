@@ -10,7 +10,7 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                {{-- <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -37,14 +37,14 @@
                             {{ __('Articles') }}
                         </x-nav-link>
                     </div>
-                @endcan
-                @can('view users')
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                            {{ __('Users') }}
-                        </x-nav-link>
-                    </div>
-                @endcan
+                @endcan --}}
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('users.index')">
+                        {{ __('Voir le site') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -70,6 +70,9 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Mes infos') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('demandes.index')">
+                            {{ __('Mes demandes') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -120,6 +123,9 @@
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('demandes.index')">
+                    {{ __('Mes demandes') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

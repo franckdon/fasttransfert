@@ -88,15 +88,12 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
+                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
                                             @can('view demandes')
-                                                <a href="{{ route('demandes.show', $demande->id) }}"
-                                                    class="px-3 py-2 text-white rounded-sm bg-slate-700 hover:bg-slate-600">Voir</a>
+                                                <x-buttons.show-button :route="route('demandes.show', $demande->id)" />
                                             @endcan
                                             @can('delete demandes')
-                                                <a href="javascript:void(0);"
-                                                    class="px-3 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
-                                                    onclick="deleteDemande({{ $demande->id }})">Delete</a>
+                                                <x-buttons.delete-button :id="$demande->id" functionName="deleteDemande" />
                                             @endcan
                                         </td>
                                     </tr>

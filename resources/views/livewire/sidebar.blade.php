@@ -84,6 +84,48 @@
         @if (auth()->user()->hasRole(['superadmin', 'assistance']))
             <div class="w-full" x-data="{ open: false }">
                 <a x-on:click="open=!open" class="flex justify-between w-full p-4 rounded bg-sky-900 hover:bg-sky-950">
+                    <span>Roles</span>
+                    <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                    <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                    </svg>
+
+
+                </a>
+                <div x-show="open" class="flex flex-col">
+                    <a href="{{ route('roles.index') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">Liste</a>
+                    <a href="{{ route('roles.create') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">Ajouter</a>
+                </div>
+            </div>
+            <div class="w-full" x-data="{ open: false }">
+                <a x-on:click="open=!open" class="flex justify-between w-full p-4 rounded bg-sky-900 hover:bg-sky-950">
+                    <span>Permissions</span>
+                    <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                    <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                    </svg>
+
+
+                </a>
+                <div x-show="open" class="flex flex-col">
+                    <a href="{{ route('permissions.index') }}"
+                        class="p-4 rounded bg-sky-900 hover:bg-sky-950">Liste</a>
+                    <a href="{{ route('permissions.create') }}"
+                        class="p-4 rounded bg-sky-900 hover:bg-sky-950">Ajouter</a>
+                </div>
+            </div>
+
+            <div class="w-full" x-data="{ open: false }">
+                <a x-on:click="open=!open"
+                    class="flex justify-between w-full p-4 rounded bg-sky-900 hover:bg-sky-950">
                     <span>Secteurs d'activité</span>
                     <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -98,7 +140,8 @@
                 </a>
                 <div x-show="open" class="flex flex-col">
                     <a href="{{ route('domaines.index') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">Liste</a>
-                    <a href="{{ route('domaines.create') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">Ajouter</a>
+                    <a href="{{ route('domaines.create') }}"
+                        class="p-4 rounded bg-sky-900 hover:bg-sky-950">Ajouter</a>
                 </div>
             </div>
 
@@ -106,7 +149,8 @@
                 $unreadMessagesCount = \App\Models\Message::where('is_read', false)->count();
             @endphp
 
-            <a href="{{ route('messages.index') }}" class="flex flex-row p-4 rounded bg-slate-700 hover:bg-slate-800">
+            <a href="{{ route('messages.index') }}"
+                class="flex flex-row p-4 rounded bg-slate-700 hover:bg-slate-800">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -115,7 +159,8 @@
                 </svg>
                 <span class="mx-2">Messages</span>
                 @if ($unreadMessagesCount > 0)
-                    <span class="badge bg-red-500">{{ $unreadMessagesCount }}</span>
+                    <span
+                        class="bg-red-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">{{ $unreadMessagesCount }}</span>
                 @endif
             </a>
 

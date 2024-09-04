@@ -2,7 +2,6 @@
     @if ($step == 1)
         <!-- Étape 1: Paragraphe d'information avec H1 -->
         <div>
-            <h1 class="mb-6 text-3xl font-bold">Création de Demande</h1>
             <div class="p-6 text-gray-900">
                 <h2 class="mb-6 text-2xl">Procédure de création de demande</h2>
                 <p class="mb-6 text-lg">L’ordre de virement en français <b>SIGNE ET CACHETE PAR LES PERSONNES

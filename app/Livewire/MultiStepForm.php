@@ -140,6 +140,10 @@ class MultiStepForm extends Component
         // Envoyer une notification à l'administrateur et au demandeur
         $demandeur->notify(new DemandeCreated($demande));
 
+        $admins->each(function ($admin) use ($demande) {
+            $admin->notify(new DemandeCreated($demande));
+        });
+
         return redirect()->route('demandes.index')->with('success', 'La demande a été crée avec succès');
     }
 }

@@ -18,7 +18,7 @@
             <x-message> </x-message>
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2 class="mb-6 text-2xl">Messages List</h2>
+                    <h2 class="mb-6 text-2xl">Liste des messages</h2>
                     <table class="w-full">
                         <thead class="bg-gray-50">
                             <tr class="border-b">
@@ -67,15 +67,12 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
+                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
                                             @can('view messages')
-                                                <a href="{{ route('messages.show', $message->id) }}"
-                                                    class="px-3 py-2 text-white rounded-sm bg-slate-700 hover:bg-slate-600">Voir</a>
+                                                <x-buttons.show-button :route="route('messages.show', $message->id)" />
                                             @endcan
                                             @can('delete messages')
-                                                <a href="javascript:void(0);"
-                                                    class="px-3 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
-                                                    onclick="deleteMessage({{ $message->id }})">Delete</a>
+                                                <x-buttons.delete-button :id="$message->id" functionName="deleteMessage" />
                                             @endcan
                                         </td>
                                     </tr>

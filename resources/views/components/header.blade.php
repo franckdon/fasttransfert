@@ -17,7 +17,7 @@
             <!-- Boutons pour utilisateur non connecté -->
             @guest
                 <div class="hidden space-x-4 md:flex">
-                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-gray-900">Se connecter</a>
+                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-gray-900 mt-2">Se connecter</a>
                     <a href="{{ route('register') }}"
                         class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">S'enregistrer</a>
                 </div>
@@ -40,6 +40,8 @@
                             class="absolute right-0 hidden w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                             <a href="{{ route('profile.edit') }}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mon profil</a>
+                            <a href="{{ route('demandes.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mes demandes</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
@@ -88,6 +90,9 @@
                     <a href="{{ route('profile.edit') }}"
                         class="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50">Mon
                         profil</a>
+                    <a href="{{ route('demandes.index') }}"
+                        class="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50">Mes
+                        demandes</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit"
