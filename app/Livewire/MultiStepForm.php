@@ -78,7 +78,9 @@ class MultiStepForm extends Component
         }
         // Vérification des réponses avant de passer à l'étape suivante
         if ($this->step == 2 && in_array('no', $this->responses)) {
-            session()->flash('error', 'Vous ne pouvez pas terminer la procédure. Toutes les réponses doivent être "oui".');
+            session()->flash('error', 'VOTRE DOSSIER N’EST PAS ELIGIBLE AU GUICHET DE LA BCEAO.
+ BESOIN D’ASSISTANCE, prière contacter l’équipe KFM Consulting au 05 74 54 51 45 Merci
+.');
             return;
         }
 

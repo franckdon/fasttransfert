@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Demande;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,9 @@ class DashboardController extends Controller
             })->count();
         }
 
+        $demandesRecentes = Demande::orderBy('created_at', 'desc')->paginate(10);
+        $logs = ActivityLog::orderBy('created_at', 'desc')->paginate(10);
+
         return view(
             'dashboard',
             ([
@@ -54,6 +58,8 @@ class DashboardController extends Controller
                 'demandesPending' => $demandesPending,
                 'demandesApproved' => $demandesApproved,
                 'demandesRejected' => $demandesRejected,
+                'demandesRecentes' => $demandesRecentes,
+                'logs' => $logs
             ])
         );
     }

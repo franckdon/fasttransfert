@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\DocumentController;
@@ -24,6 +25,7 @@ Route::get('/', function () {
 
 
 Route::view('/contact-us', 'contact')->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -120,6 +122,10 @@ Route::middleware('auth')->group(function () {
     route::get('/domaines/{id}/edit', [DomaineController::class, 'edit'])->name('domaines.edit');
     route::post('/domaines/{id}', [DomaineController::class, 'update'])->name('domaines.update');
     route::delete('/domaines/', [DomaineController::class, 'destroy'])->name('domaines.destroy');
+
+    Route::get('/messages', [ContactController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{id}', [ContactController::class, 'show'])->name('messages.show');
+    Route::delete('/messages/', [ContactController::class, 'destroy'])->name('messages.destroy');
 
 
     Route::get('/activity-logs', [ActivityLogController::class, 'index'])->name('activity.logs');

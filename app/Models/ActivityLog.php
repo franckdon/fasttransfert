@@ -20,4 +20,14 @@ class ActivityLog extends Model
     protected $casts = [
         'properties' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getPropertiesAttribute($value)
+    {
+        return json_decode($value);
+    }
 }

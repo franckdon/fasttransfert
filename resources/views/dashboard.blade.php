@@ -22,74 +22,89 @@
                         </div>
 
 
+                        @if (auth()->user()->hasRole(['superadmin', 'assistance']))
+                            <!-- Recent Posts and Activity Logs -->
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                <!-- Recent Posts -->
+                                <div class="p-6 bg-white rounded-lg shadow-lg">
+                                    <h2 class="mb-4 text-lg font-bold">Demandes récentes</h2>
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                    #</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                    Entreprise</th>
+                                                <th
+                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                    Créé à</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            @if ($demandesRecentes->isNotEmpty())
+                                                @foreach ($demandesRecentes as $demande)
+                                                    <tr>
+                                                        <td class="px-6 py-4 whitespace-nowrap">{{ $demande->id }}</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap"><a href="#"
+                                                                class="text-blue-500">
+                                                                {{ $demande->demandeur->name }}
+                                                            </a>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap">
+                                                            {{ \Carbon\Carbon::parse($demande->created_at)->format('d M, Y') }}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                    <div class="my-3">
+                                        {{ $demandesRecentes->links() }}
+                                    </div>
+                                </div>
 
-                        <!-- Recent Posts and Activity Logs -->
-                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <!-- Recent Posts -->
-                            <div class="p-6 bg-white rounded-lg shadow-lg">
-                                <h2 class="mb-4 text-lg font-bold">Demandes récentes</h2>
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                #</th>
-                                            <th
-                                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Entreprise</th>
-                                            <th
-                                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Créé à</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">1</td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><a href="#"
-                                                    class="text-blue-500">9 Things I Love About Shaving My Head</a></td>
-                                            <td class="px-6 py-4 whitespace-nowrap">2024-07-13</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">2</td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><a href="#"
-                                                    class="text-blue-500">Why Teamwork Really Makes The Dream Work</a>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">2024-07-13</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                <!-- Activity Logs -->
+                                <div class="p-6 bg-white rounded-lg shadow-lg">
+                                    <h2 class="mb-4 text-lg font-bold">Journal d'activités</h2>
+                                    <ul class="divide-y divide-gray-200">
+                                        @if ($logs->isNotEmpty())
+                                            @foreach ($logs as $log)
+                                                <li class="flex items-center py-4">
+                                                    <div
+                                                        class="flex items-center justify-center w-10 h-10 text-white bg-blue-500 rounded-full">
+                                                        F
+                                                    </div>
+                                                    <div class="ml-3">
 
-                            <!-- Activity Logs -->
-                            <div class="p-6 bg-white rounded-lg shadow-lg">
-                                <h2 class="mb-4 text-lg font-bold">Journal d'activités</h2>
-                                <ul class="divide-y divide-gray-200">
-                                    <li class="flex items-center py-4">
-                                        <div
-                                            class="flex items-center justify-center w-10 h-10 text-white bg-blue-500 rounded-full">
-                                            F
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm text-gray-700"><strong>Franck BASSA</strong> mis à jour
-                                                shipping-rule-item "Livraison a"</p>
-                                            <p class="text-xs text-gray-400">il y a 3 jours (41.207.209.134)</p>
-                                        </div>
-                                    </li>
-                                    <li class="flex items-center py-4">
-                                        <div
-                                            class="flex items-center justify-center w-10 h-10 text-white bg-blue-500 rounded-full">
-                                            F
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm text-gray-700"><strong>Franck BASSA</strong> mis à jour
-                                                shipping-rule-item "Livraison par colissimo (5 à 10...)"</p>
-                                            <p class="text-xs text-gray-400">il y a 3 jours (41.207.209.134)</p>
-                                        </div>
-                                    </li>
-                                    <!-- Add more activity logs as needed -->
-                                </ul>
+                                                        @php
+                                                            $daysDifference = \Carbon\Carbon::parse(
+                                                                $log->created_at,
+                                                            )->diffInDays(\Carbon\Carbon::now());
+                                                            $hoursDifference = \Carbon\Carbon::parse(
+                                                                $log->created_at,
+                                                            )->diffInHours(\Carbon\Carbon::now());
+                                                        @endphp
+
+                                                        <p class="text-sm text-gray-700">
+                                                            <strong>{{ $log->user->name }}</strong> mis à
+                                                            jour
+                                                            {{ $log->entity_type == 'App\Models\Demande' ? 'demande' : 'connecté' }}
+                                                        </p>
+                                                        <p class="text-xs text-gray-400">
+                                                            ({{ \Carbon\Carbon::parse($log->created_at)->format('d M, Y') }})
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+
+                                        @endif
+                                        <!-- Add more activity logs as needed -->
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
 
                 </div>

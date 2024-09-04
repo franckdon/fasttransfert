@@ -46,7 +46,7 @@
 
             <div class="mb-6 text-lg font-semibold text-gray-700">
                 <p>Les questions suivantes sont obligatoires pour la création de votre demande de transfert</p>
-                <p>Score: {{ $score }} / {{ count($questions) }}</p>
+                {{-- <p>Score: {{ $score }} / {{ count($questions) }}</p> --}}
             </div>
 
             @if (auth()->user()->hasRole(['superadmin', 'assistance']))
