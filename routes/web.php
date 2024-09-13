@@ -129,6 +129,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/activity-logs', [ActivityLogController::class, 'index'])->name('activity.logs');
+    route::delete('/activity-logs/', [ActivityLogController::class, 'destroy'])->name('logs.destroy');
 });
 
 require __DIR__ . '/auth.php';

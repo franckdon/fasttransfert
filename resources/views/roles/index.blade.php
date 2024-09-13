@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="flex">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Roles List') }}
+                {{ __('Liste des rôles') }}
             </h2>
             @can('create roles')
                 <a href="{{ route('roles.create') }}"
-                    class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Create
-                    role</a>
+                    class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Créer un rôle
+                </a>
             @endcan
         </div>
     </x-slot>
@@ -18,17 +18,17 @@
             <x-message> </x-message>
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2 class="mb-6 text-2xl">Role List</h2>
+                    <h2 class="mb-6 text-2xl">Liste des rôles</h2>
                     <table class="w-full">
                         <thead class="bg-gray-50">
                             <tr class="border-b">
                                 <th class="px-6 py-3 text-left" width="60">#</th>
                                 <th class="px-6 py-3 text-left">
-                                    Name
+                                    Libellé
                                 </th>
-                                <th class="px-6 py-3 text-left">Permissions</th>
+                                <th class="px-6 py-3 text-left">Autorisations</th>
                                 <th class="px-6 py-3 text-left" width="180">
-                                    Created
+                                    Date de création
                                 </th>
                                 <th class="px-6 py-3 text-center" width="180">Actions</th>
                             </tr>
@@ -54,7 +54,7 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
+                                            class="flex flex-row px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
                                             @can('edit roles')
                                                 <x-buttons.edit-button :route="route('roles.edit', $role->id)" />
                                             @endcan
@@ -75,7 +75,7 @@
             <x-slot name="script">
                 <script type="text/javascript">
                     function deleteRole(id) {
-                        if (confirm('Are you sure you want to delete this permission?')) {
+                        if (confirm('Are you sure you want to delete this role?')) {
                             $.ajax({
                                 url: '{{ route('roles.destroy') }}',
                                 type: 'DELETE',

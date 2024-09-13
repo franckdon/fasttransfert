@@ -67,21 +67,21 @@ class Demande extends Model
             $demande->documents()->detach();
         });
 
-        static::created(function ($post) {
-            app(ActivityLogger::class)->log('create', $post, [
-                'attributes' => $post->getAttributes(),
+        static::created(function ($demande) {
+            app(ActivityLogger::class)->log('create', $demande, [
+                'attributes' => $demande->getAttributes(),
             ]);
         });
 
-        static::updated(function ($post) {
-            app(ActivityLogger::class)->log('update', $post, [
-                'attributes' => $post->getChanges(),
+        static::updated(function ($demande) {
+            app(ActivityLogger::class)->log('update', $demande, [
+                'attributes' => $demande->getChanges(),
             ]);
         });
 
-        static::deleted(function ($post) {
-            app(ActivityLogger::class)->log('delete', $post, [
-                'attributes' => $post->getAttributes(),
+        static::deleted(function ($demande) {
+            app(ActivityLogger::class)->log('delete', $demande, [
+                'attributes' => $demande->getAttributes(),
             ]);
         });
     }

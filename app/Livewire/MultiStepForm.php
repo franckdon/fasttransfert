@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\Reglement;
 use App\Models\User;
 use App\Notifications\DemandeCreated;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -122,15 +123,25 @@ class MultiStepForm extends Component
         $demande->addHistorique('en attente', 'La demande a été créée.');
         $demande->save();
 
+        //dd($this->uploadedFiles);
+
         foreach ($this->files as $file) {
             if (isset($this->uploadedFiles[$file->id])) {
-                $filePath = $this->uploadedFiles[$file->id]->store('documents', 'public');
+                $year = date('Y');
+                $month = date('m');
+                $folderPath = "{$year}/{$month}/{$demande->id}";
+
+
+                $filePath = $this->uploadedFiles[$file->id]->storeAs(
+                    "documents/{$folderPath}",
+                    $this->uploadedFiles[$file->id]->getClientOriginalName(),
+                    'public'
+                );
+
+                logger()->info('File uploaded: ' . $filePath);
                 $demande->documents()->attach($file->id, [
                     'file_path' => $filePath,
                 ]);
-
-                // Debugging
-                logger()->info('File uploaded: ' . $filePath);
             }
         }
 

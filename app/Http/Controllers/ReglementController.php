@@ -143,7 +143,6 @@ class ReglementController extends Controller implements HasMiddleware
         $validator = Validator::make($request->all(), [
             'reglement_id' => 'required',
             'document_id' => 'required',
-            'is_required' => 'required|nullable',
         ]);
 
         // Convertir la valeur en 1 ou 0
@@ -156,19 +155,22 @@ class ReglementController extends Controller implements HasMiddleware
         }
     }
 
-    public function detachDocuments(Request $request, $id)
+    public function detachDocuments(Request $request)
     {
-        $reglement = Reglement::find($id);
-        $validator = Validator::make($request->all(), [
-            'reglement_id' => 'required',
-            'document_id' => 'required',
-        ]);
+        $document = Document::find($request->document_id);
+        $reglement = Reglement::find($request->reglement_id);
 
-        if ($validator->passes()) {
-            $reglement->documents()->detach($request->document_id);
-            return redirect()->route('reglements.documents', $id)->with('success', 'Document detached successfully');
-        } else {
-            return redirect()->route('reglements.documents', $id)->withErrors($validator)->withInput();
+        if ($document == null || $reglement == null) {
+            session()->flash('error', 'Document or reglement not found');
+            return response()->json([
+                'status' => false
+            ]);
         }
+        $reglement->documents()->detach($document->id);
+
+        session()->flash('success', 'Document detached successfully');
+        return response()->json([
+            'status' => true
+        ]);
     }
 }

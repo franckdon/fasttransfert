@@ -2,12 +2,13 @@
     <x-slot name="header">
         <div class="flex">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Demande List') }}
+                {{ __('Liste des demandes') }}
             </h2>
             @can('create demandes')
                 <a href="{{ route('demandes.create') }}"
-                    class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Create
-                    demande</a>
+                    class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Créer une
+                    demande
+                </a>
             @endcan
         </div>
     </x-slot>
@@ -18,7 +19,7 @@
             <x-message> </x-message>
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2 class="mb-6 text-2xl">Demandes List</h2>
+                    <h2 class="mb-6 text-2xl">Liste des demandes</h2>
                     <table class="w-full">
                         <thead class="bg-gray-50">
                             <tr class="border-b">
@@ -88,7 +89,7 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
+                                            class="flex flex-row px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
                                             @can('view demandes')
                                                 <x-buttons.show-button :route="route('demandes.show', $demande->id)" />
                                             @endcan

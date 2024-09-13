@@ -17,11 +17,11 @@ class Setting extends Model
     }
 
 
-    // public static function set($key, $value)
-    // {
-    //     // Supprimer l'entrée du cache pour qu'elle soit rechargée
-    //     Cache::forget('settings_' . $key);
+    public static function set($key, $value)
+    {
+        // Supprimer l'entrée du cache pour qu'elle soit rechargée
+        Cache::forget('settings_' . $key);
 
-    //     return static::updateOrCreate(['key' => $key], ['value' => $value]);
-    // }
+        return static::updateOrCreate(['key' => $key], ['value' => $value]);
+    }
 }

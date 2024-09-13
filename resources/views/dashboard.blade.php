@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Dashboard') }}
+            {{ __('Tableau de bord') }}
         </h2>
     </x-slot>
 
@@ -77,23 +77,9 @@
                                                         F
                                                     </div>
                                                     <div class="ml-3">
-
-                                                        @php
-                                                            $daysDifference = \Carbon\Carbon::parse(
-                                                                $log->created_at,
-                                                            )->diffInDays(\Carbon\Carbon::now());
-                                                            $hoursDifference = \Carbon\Carbon::parse(
-                                                                $log->created_at,
-                                                            )->diffInHours(\Carbon\Carbon::now());
-                                                        @endphp
-
                                                         <p class="text-sm text-gray-700">
-                                                            <strong>{{ $log->user->name }}</strong> mis à
-                                                            jour
-                                                            {{ $log->entity_type == 'App\Models\Demande' ? 'demande' : 'connecté' }}
-                                                        </p>
-                                                        <p class="text-xs text-gray-400">
-                                                            ({{ \Carbon\Carbon::parse($log->created_at)->format('d M, Y') }})
+                                                            <strong>{{ $log->description }}</strong>
+
                                                         </p>
                                                     </div>
                                                 </li>

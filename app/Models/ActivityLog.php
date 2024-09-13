@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ActivityLogger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,5 +30,45 @@ class ActivityLog extends Model
     public function getPropertiesAttribute($value)
     {
         return json_decode($value);
+    }
+
+    public function getDescriptionAttribute()
+    {
+        $action = $this->action;
+        $entity = $this->entity_type;
+        $entityId = $this->entity_id;
+        $createdAt = $this->created_at->diffForHumans();
+        $user = $this->user->name;
+
+        if ($action === 'create') {
+            $action = 'a crée';
+        } elseif ($action === 'update') {
+            $action = 'a modifié';
+        } elseif ($action === 'delete') {
+            $action = 'a supprimé';
+        }
+
+        if ($entity === 'App\Models\Demande') {
+            $entity = 'une demande';
+        } elseif ($entity === 'App\Models\Reglement') {
+            $entity = 'un reglement';
+        } elseif ($entity === 'App\Models\Question') {
+            $entity = 'une question';
+        } elseif ($entity === 'App\Models\ActivityLog') {
+            $entity = 'une activité';
+        } elseif ($entity === 'App\Models\Domaine') {
+            $entity = 'un secteur d\'activité';
+        }
+
+        return "{$user} {$action} {$entity} #{$entityId} il y a {$createdAt}";
+    }
+
+    public static function booted()
+    {
+        static::deleted(function ($log) {
+            app(ActivityLogger::class)->log('delete', $log, [
+                'attributes' => $log->getAttributes(),
+            ]);
+        });
     }
 }

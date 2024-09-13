@@ -16,7 +16,7 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Mot de passe ')" />
 
             <x-text-input id="password" class="block w-full mt-1" type="password" name="password" required
                 autocomplete="current-password" />
@@ -35,13 +35,13 @@
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                <a class="text-sm text-gray-600 underline rounded-md hover:text-sky-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     href="{{ route('password.request') }}">
                     {{ __('Mot de passe oublié?') }}
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="px-2 py-4 ms-3 bg-primary-900 hover:bg-sky-700">
                 {{ __('Se connecter') }}
             </x-primary-button>
         </div>

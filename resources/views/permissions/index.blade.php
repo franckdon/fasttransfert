@@ -6,8 +6,9 @@
             </h2>
             @can('create permissions')
                 <a href="{{ route('permissions.create') }}"
-                    class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Create
-                    Permission</a>
+                    class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+                    Créer une autorisation
+                </a>
             @endcan
         </div>
     </x-slot>
@@ -18,16 +19,16 @@
             <x-message> </x-message>
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2 class="mb-6 text-2xl">Permissions List</h2>
+                    <h2 class="mb-6 text-2xl">Liste des autorisations</h2>
                     <table class="w-full">
                         <thead class="bg-gray-50">
                             <tr class="border-b">
                                 <th class="px-6 py-3 text-left" width="60">#</th>
                                 <th class="px-6 py-3 text-left">
-                                    Name
+                                    Nom
                                 </th>
                                 <th class="px-6 py-3 text-left" width="180">
-                                    Created
+                                    Date de création
                                 </th>
                                 <th class="px-6 py-3 text-center" width="180">Actions</th>
                             </tr>
@@ -51,7 +52,7 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
+                                            class="flex flex-row px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
                                             @can('edit permissions')
                                                 <x-buttons.edit-button :route="route('permissions.edit', $permission->id)" />
                                             @endcan

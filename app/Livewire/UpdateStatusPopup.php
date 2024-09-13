@@ -4,8 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Demande;
 use App\Models\User;
-use App\Notifications\DemandeApproved;
-use App\Notifications\DemandeRejected;
 use App\Notifications\StatusChanged;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
@@ -15,6 +13,7 @@ class UpdateStatusPopup extends Component
     public $demande;
     public $status;
     public $commentaire;
+    public $open = false; // Ajouter cette ligne pour gérer l'état du modal
 
     protected $rules = [
         'status' => 'required|string',
@@ -30,7 +29,6 @@ class UpdateStatusPopup extends Component
 
     public function updateStatus(Demande $demande)
     {
-        //dd($this->demande->demandeur->id);
         $this->validate();
 
         $this->demande->historiques()->create([
@@ -42,6 +40,9 @@ class UpdateStatusPopup extends Component
 
         $demandeur = User::find($this->demande->demandeur->id);
         Notification::send($demandeur, new StatusChanged($this->demande));
+
+        // Fermer le modal après la mise à jour
+        $this->open = false;
     }
 
     public function render()

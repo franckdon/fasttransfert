@@ -62,16 +62,9 @@
                                         </td>
                                         <td
                                             class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
-
-
-
-
-
                                             <a href="javascript:void(0);"
                                                 class="px-3 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
-                                                onclick="deleteDocument({{ $document->id }})">Delete</a>
-
-
+                                                onclick="detachDocument({{ $document->id }}, {{ $reglement->id }})">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -127,13 +120,14 @@
                         document.getElementById('addDocumentModal').classList.toggle('hidden');
                     }
 
-                    function deleteDocument(id) {
-                        if (confirm('Are you sure you want to delete this reglement?')) {
+                    function detachDocument(documentId, reglementId) {
+                        if (confirm('Are you sure you want to detach this document?')) {
                             $.ajax({
                                 url: '{{ route('reglements.documents.detach', $document->id) }}',
                                 type: 'DELETE',
                                 data: {
-                                    id: id,
+                                    document_id: documentId,
+                                    reglement_id: reglementId,
                                 },
                                 headers: {
                                     'x-csrf-token': '{{ csrf_token() }}'

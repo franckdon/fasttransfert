@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between py-4">
             <!-- Logo -->
             <a href="{{ route('home') }}" class="text-lg font-semibold text-gray-900">
-                <img src="#" alt="Logo" class="h-8">
+                <img src="/images/logos/logo.png" alt="Logo" class="h-12">
             </a>
 
             <!-- Menu principal -->
@@ -16,10 +16,12 @@
 
             <!-- Boutons pour utilisateur non connecté -->
             @guest
-                <div class="hidden space-x-4 md:flex">
-                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-gray-900 mt-2">Se connecter</a>
+                <div class="items-center hidden space-x-4 md:flex">
+                    <a href="{{ route('login') }}"
+                        class="px-4 py-4 text-gray-700 border-2 rounded-lg border-sky-900 hover:text-gray-900 hover:border-sky-700">Se
+                        connecter</a>
                     <a href="{{ route('register') }}"
-                        class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">S'enregistrer</a>
+                        class="px-4 py-4 text-white rounded-lg bg-sky-900 hover:bg-sky-700">S'enregistrer</a>
                 </div>
             @endguest
 

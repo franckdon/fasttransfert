@@ -8,8 +8,8 @@
 
             @can('create questions')
                 <a href="{{ route('questions.create', $reglement->id) }}"
-                    class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Create
-                    question</a>
+                    class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Ajouter
+                </a>
             @endcan
         </div>
     </x-slot>
@@ -20,17 +20,17 @@
             <x-message> </x-message>
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2 class="mb-6 text-2xl">Questions List</h2>
+                    <h2 class="mb-6 text-2xl">Liste des questions</h2>
                     <table class="w-full">
                         <thead class="bg-gray-50">
                             <tr class="border-b">
                                 <th class="px-6 py-3 text-left" width="60">#</th>
                                 <th class="px-6 py-3 text-left">
-                                    title
+                                    Libellé
                                 </th>
                                 {{-- <th class="px-6 py-3 text-left">description</th> --}}
                                 <th class="px-6 py-3 text-left" width="80">
-                                    Created
+                                    Date de création
                                 </th>
                                 <th class="px-6 py-3 text-center" width="280">Actions</th>
                             </tr>
@@ -56,7 +56,7 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
+                                            class="flex flex-row px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
 
                                             @can('edit questions')
                                                 <a href="{{ route('questions.edit', $question->id) }}" type="button"
@@ -70,9 +70,7 @@
                                                 </a>
                                             @endcan
                                             @can('delete questions')
-                                                <a href="javascript:void(0);"
-                                                    class="px-3 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
-                                                    onclick="deleteQuestion({{ $question->id }})">Delete</a>
+                                                <x-buttons.delete-button :id="$question->id" functionName="deleteQuestion" />
                                             @endcan
 
                                         </td>

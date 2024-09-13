@@ -96,10 +96,11 @@
     @elseif ($step == 3)
         <!-- Étape 3: Téléversement des fichiers -->
         <div class="p-6 bg-white rounded-lg shadow-md">
+
             @foreach ($files as $file)
                 <div class="mb-4">
                     <label for="file{{ $file->id }}" class="block mb-2 text-sm font-medium text-gray-700">
-                        {{ $file->description }}
+                        {{ $file->name }}
                     </label>
                     <input type="file" id="file{{ $file->id }}" wire:model="uploadedFiles.{{ $file->id }}"
                         class="block w-full text-sm text-gray-500 border border-gray-300 rounded-lg cursor-pointer focus:outline-none">
