@@ -17,7 +17,8 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
             <x-message> </x-message>
-            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+            <livewire:user-table />
+            {{-- <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h2 class="mb-6 text-2xl">Liste des utilisateurs</h2>
                     <table class="w-full">
@@ -86,7 +87,7 @@
                         {{ $users->links() }}
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <x-slot name="script">
                 <script type="text/javascript">
                     function deleteUser(id) {

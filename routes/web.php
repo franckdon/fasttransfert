@@ -17,6 +17,7 @@ use App\Http\Controllers\ReglementController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::get('/', function () {
     return view('home');
@@ -25,7 +26,7 @@ Route::get('/', function () {
 
 
 Route::view('/contact-us', 'contact')->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store')->middleware(ProtectAgainstSpam::class);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])

@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Edit Domain') }}
+                {{ __('Modifier le domaine') }}
             </h2>
             <a href="{{ route('domaines.index') }}"
-                class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Back</a>
+                class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Retour</a>
     </x-slot>
 
     <div class="py-12">
@@ -16,7 +16,7 @@
                     <form method="post" action="{{ route('domaines.update', $domaine->id) }}">
                         @csrf
                         <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Libellé</label>
                             <input value="{{ old('name', $domaine->name) }}" type="text" name="name"
                                 id="name" class="block w-full mt-1 rounded-md shadow-sm form-input"
                                 value="{{ old('name') }}" />

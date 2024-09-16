@@ -38,6 +38,11 @@ class Demande extends Model
             ->withPivot('file_path');
     }
 
+    public function lastHistory()
+    {
+        return $this->hasOne(Historique::class)->latestOfMany();
+    }
+
     public function historiques()
     {
         return $this->hasMany(Historique::class);

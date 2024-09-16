@@ -15,7 +15,7 @@
                     <h2 class="mb-6 text-2xl">Modifier l'utilisateur {{ $user->name }}</h2>
                     <form method="POST" action="{{ route('users.update', $user->id) }}">
                         @csrf
-                        @method('PUT')
+                        @method('POST')
 
                         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div class="mb-4">

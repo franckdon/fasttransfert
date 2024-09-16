@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Services\ActivityLogger;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,5 +57,31 @@ class User extends Authenticatable implements MustVerifyEmail
     public function domaine()
     {
         return $this->belongsTo(Domaine::class);
+    }
+
+    public function role()
+    {
+        return $this->roles->first()->name;
+    }
+
+    public static function booted()
+    {
+        static::created(function ($user) {
+            app(ActivityLogger::class)->log('create', $user, [
+                'attributes' => $user->getAttributes(),
+            ]);
+        });
+
+        static::updated(function ($user) {
+            app(ActivityLogger::class)->log('update', $user, [
+                'attributes' => $user->getChanges(),
+            ]);
+        });
+
+        static::deleted(function ($user) {
+            app(ActivityLogger::class)->log('delete', $user, [
+                'attributes' => $user->getAttributes(),
+            ]);
+        });
     }
 }

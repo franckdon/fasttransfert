@@ -58,6 +58,10 @@ class ActivityLog extends Model
             $entity = 'une activité';
         } elseif ($entity === 'App\Models\Domaine') {
             $entity = 'un secteur d\'activité';
+        } else if ($entity === 'App\Models\User') {
+            $entity = 'un utilisateur';
+        } else {
+            $entity = 'une entité';
         }
 
         return "{$user} {$action} {$entity} #{$entityId} il y a {$createdAt}";

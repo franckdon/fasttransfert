@@ -68,13 +68,16 @@
                                 <!-- Activity Logs -->
                                 <div class="p-6 bg-white rounded-lg shadow-lg">
                                     <h2 class="mb-4 text-lg font-bold">Journal d'activités</h2>
+                                    <div class="my-3">
+                                        {{ $demandesRecentes->links() }}
+                                    </div>
                                     <ul class="divide-y divide-gray-200">
                                         @if ($logs->isNotEmpty())
                                             @foreach ($logs as $log)
                                                 <li class="flex items-center py-4">
                                                     <div
                                                         class="flex items-center justify-center w-10 h-10 text-white bg-blue-500 rounded-full">
-                                                        F
+                                                        {{ $log->user->name[0] }}
                                                     </div>
                                                     <div class="ml-3">
                                                         <p class="text-sm text-gray-700">
@@ -88,6 +91,10 @@
                                         @endif
                                         <!-- Add more activity logs as needed -->
                                     </ul>
+                                    <a href={{ route('activity.logs') }} type="button"
+                                        class="px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-sky-700 focus:outline-none focus:ring focus:ring-blue-300">
+                                        Voir plus
+                                    </a>
                                 </div>
                             </div>
                         @endif

@@ -7,7 +7,7 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}">
 
 
-    <title>{{ config('app.name', 'Laravel') }} | Tranfert de document en ligne</title>
+    <title>{{ config('app.name', 'Laravel') }} | Transfert de document en ligne</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">

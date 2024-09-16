@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Messages List') }}
+                {{ __('Liste des messages') }}
             </h2>
             @can('create permissions')
                 {{-- <a href="{{ route('permissions.create') }}"
@@ -30,10 +30,10 @@
                                     Email
                                 </th>
                                 <th class="px-6 py-3 text-left">
-                                    telephone
+                                    Telephone
                                 </th>
                                 <th class="px-6 py-3 text-left" width="180">
-                                    Créé le
+                                    Reçu le
                                 </th>
                                 <th class="px-6 py-3 text-center" width="180">Actions</th>
                             </tr>
@@ -67,7 +67,7 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap flex flex-row">
+                                            class="flex flex-row px-6 py-3 text-sm font-medium leading-5 text-center whitespace-no-wrap">
                                             @can('view messages')
                                                 <x-buttons.show-button :route="route('messages.show', $message->id)" />
                                             @endcan
