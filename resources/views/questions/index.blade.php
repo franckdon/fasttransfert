@@ -28,7 +28,7 @@
                                 <th class="px-6 py-3 text-left">
                                     Libellé
                                 </th>
-                                {{-- <th class="px-6 py-3 text-left">description</th> --}}
+                                <th class="px-6 py-3 text-left">Type de question</th>
                                 <th class="px-6 py-3 text-left" width="80">
                                     Date de création
                                 </th>
@@ -48,8 +48,23 @@
                                                 {{ $question->intitule }}
                                             </div>
                                         </td>
-                                        {{-- <td class="px-6 py-3 text-left">
-                                            {{ $reglement->description }}</td> --}}
+                                        <td class="px-6 py-3 text-left">
+                                            @if ($question->is_required)
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-white bg-red-800 rounded-full">
+                                                    Obligatoire
+                                                </span>
+                                            @else
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full">
+                                                    Complémentaire
+                                                </span>
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-white bg-blue-800 rounded-full">
+                                                    {{ $question->document->name }}
+                                                </span>
+                                            @endif
+                                        </td>
                                         <td class="px-6 py-3 text-left">
                                             <div class="text-sm leading-5 text-gray-500">
                                                 {{ \Carbon\Carbon::parse($question->created_at)->format('d M, Y') }}

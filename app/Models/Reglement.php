@@ -28,7 +28,13 @@ class Reglement extends Model
     public function documents()
     {
         return $this->belongsToMany(Document::class, 'reglements_documents')
-            ->withPivot('is_required');
+            ->withPivot('is_required', true);
+    }
+
+    public function complementaryDocuments()
+    {
+        return $this->belongsToMany(Document::class, 'question_document')
+            ->withPivot('is_complementary', true);
     }
 
     public static function booted()

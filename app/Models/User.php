@@ -59,11 +59,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Domaine::class);
     }
 
-    public function role()
-    {
-        return $this->roles->first()->name;
-    }
-
     public static function booted()
     {
         static::created(function ($user) {

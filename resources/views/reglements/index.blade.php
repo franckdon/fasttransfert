@@ -26,12 +26,8 @@
                                 <th class="px-6 py-3 text-left">
                                     Libellé
                                 </th>
-                                {{-- <th class="px-6 py-3 text-left">Nombre de fichiers</th> --}}
                                 <th class="px-6 py-3 text-left" width="80">
-                                    Nbre fichiers
-                                </th>
-                                <th class="px-6 py-3 text-left" width="80">
-                                    Nbre questions
+                                    Questions
                                 </th>
                                 <th class="px-6 py-3 text-center" width="280">Actions</th>
                             </tr>
@@ -49,16 +45,6 @@
                                                 <span class="mr-10">{{ $reglement->title }}</span>
 
                                             </div>
-                                        </td>
-                                        <td class="px-6 py-3 text-left">
-                                            <a href="{{ route('reglements.documents', $reglement->id) }}">
-                                                <span
-                                                    class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">
-
-                                                    {{ $reglement->documents->count() }}
-                                                </span>
-                                            </a>
-                                            Fichier(s)
                                         </td>
                                         <td class="px-6 py-3 text-left">
                                             <a href="{{ route('questions.index', $reglement->id) }}">

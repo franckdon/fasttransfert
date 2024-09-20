@@ -17,8 +17,8 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
             <x-message> </x-message>
-            <livewire:demande-table />
-            {{-- <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+            {{-- <livewire:demande-table /> --}}
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h2 class="mb-6 text-2xl">Liste des demandes</h2>
                     <table class="w-full">
@@ -52,7 +52,7 @@
                                     <tr class="border-b">
                                         <td class="px-6 py-3 text-left">
                                             <div class="text-sm font-medium leading-5 text-gray-900">
-                                                {{ $loop->iteration }}
+                                                {{ $demande->iteration }}
                                             </div>
                                         <td class="px-6 py-3 text-left">
                                             <div class="text-sm font-medium leading-5 text-gray-900">
@@ -107,7 +107,7 @@
                         {{ $demandes->links() }}
                     </div>
                 </div>
-            </div> --}}
+            </div>
             <x-slot name="script">
                 <script type="text/javascript">
                     function deleteDemande(id) {

@@ -38,7 +38,7 @@ class ActivityLog extends Model
         $entity = $this->entity_type;
         $entityId = $this->entity_id;
         $createdAt = $this->created_at->diffForHumans();
-        $user = $this->user->name;
+        $user = $this->user->name ?? 'Nouvel utilisateur';
 
         if ($action === 'create') {
             $action = 'a crée';
@@ -63,8 +63,11 @@ class ActivityLog extends Model
         } else {
             $entity = 'une entité';
         }
-
-        return "{$user} {$action} {$entity} #{$entityId} il y a {$createdAt}";
+        if ($user === 'Nouvel utilisateur') {
+            return "Un nouveau compte a été créé il y a {$createdAt}";
+        } else {
+            return "{$user} {$action} {$entity} #{$entityId} il y a {$createdAt}";
+        }
     }
 
     public static function booted()

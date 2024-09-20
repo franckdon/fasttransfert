@@ -268,6 +268,37 @@
                                 </div>
                                 </p>
                             </details>
+
+                            <details class="py-1 text-sm group">
+                                <summary
+                                    class="flex cursor-pointer flex-row items-center justify-between py-1 font-semibold text-gray-800 marker:[font-size:0px]">
+                                    Documents
+                                    <svg class="w-6 h-6 text-gray-400 transform rotate-0 group-open:rotate-180"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7">
+                                        </path>
+                                    </svg>
+                                </summary>
+                                <p class="text-gray-500">
+                                <div class="grid grid-cols-4 mb-3">
+                                    @if ($permissions->isNotEmpty())
+                                        @foreach ($permissions as $permission)
+                                            @if (strpos($permission, 'documents') !== false)
+                                                <div class="mt-3">
+                                                    <input type="checkbox" name="permissions[]"
+                                                        value="{{ $permission->name }}"
+                                                        id="permission-{{ $permission->id }}" class="rounded"
+                                                        {{ $hasPermissions->contains($permission->name) ? 'checked' : '' }} />
+                                                    <label for="permission-{{ $permission->id }}"
+                                                        class="">{{ $permission->name }}</label>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </div>
+                                </p>
+                            </details>
                         </section>
 
                         {{-- <div class="grid grid-cols-4 mb-3">

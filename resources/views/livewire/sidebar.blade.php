@@ -72,18 +72,18 @@
                     Consulter les
                     demandes
                 </a>
-                @if (auth()->user()->hasRole(['superadmin', 'assistance']))
-                    <a href="{{ route('reglements.index') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">
-                        Gestion
-                        règlements
-                    </a>
-                    <a href="{{ route('documents.index') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">
-                        Gestion
-                        documents
-                    </a>
-                @endif
             </div>
         </div>
+        @if (auth()->user()->hasRole(['superadmin', 'assistance']))
+            <a href="{{ route('reglements.index') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">
+                Gestion
+                règlements
+            </a>
+            <a href="{{ route('documents.index') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">
+                Gestion
+                documents
+            </a>
+        @endif
         @if (auth()->user()->hasRole(['superadmin', 'assistance']))
             <div class="w-full" x-data="{ open: false }">
                 <a x-on:click="open=!open" class="flex justify-between w-full p-4 rounded bg-sky-900 hover:bg-sky-950">

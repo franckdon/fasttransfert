@@ -13,11 +13,19 @@ class Question extends Model
     protected $fillable = [
         'intitule',
         'reglement_id',
+        'is_required',
+        'is_complementary',
+        'document_id',
     ];
 
     public function reglement()
     {
         return $this->belongsTo(Reglement::class);
+    }
+
+    public function document()
+    {
+        return $this->belongsTo(Document::class);
     }
 
     public static function booted()

@@ -10,7 +10,7 @@ class ActivityLogger
     public function log($action, $entity = null, $properties = [])
     {
         ActivityLog::create([
-            'user_id' => Auth::id(),
+            'user_id' => Auth::id() ?? null,
             'action' => $action,
             'entity_type' => $entity ? get_class($entity) : null,
             'entity_id' => $entity ? $entity->id : null,

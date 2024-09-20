@@ -77,7 +77,11 @@
                                                 <li class="flex items-center py-4">
                                                     <div
                                                         class="flex items-center justify-center w-10 h-10 text-white bg-blue-500 rounded-full">
-                                                        {{ $log->user->name[0] }}
+                                                        @if ($log->user === null)
+                                                            {{ 'N' }}
+                                                        @else
+                                                            {{ $log->user->name[0] }}
+                                                        @endif
                                                     </div>
                                                     <div class="ml-3">
                                                         <p class="text-sm text-gray-700">
