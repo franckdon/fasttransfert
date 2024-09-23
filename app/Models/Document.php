@@ -15,6 +15,11 @@ class Document extends Model
         'reglement_id',
     ];
 
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
     public function reglements()
     {
         return $this->belongsToMany(Reglement::class, 'reglements_documents')

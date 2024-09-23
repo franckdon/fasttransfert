@@ -37,13 +37,11 @@ class DocumentController extends Controller implements HasMiddleware
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'description' => 'required',
         ]);
 
         if ($validator->passes()) {
             $document = Document::create([
                 'name' => $request->name,
-                'description' => $request->description,
             ]);
 
             return redirect()->route('documents.index')->with('success', 'document created successfully');
@@ -64,14 +62,12 @@ class DocumentController extends Controller implements HasMiddleware
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'description' => 'required',
         ]);
 
         if ($validator->passes()) {
             $document = Document::findOrFail($id);
             $document->update([
                 'name' => $request->name,
-                'description' => $request->description,
             ]);
 
             return redirect()->route('documents.index')->with('success', 'document updated successfully');
