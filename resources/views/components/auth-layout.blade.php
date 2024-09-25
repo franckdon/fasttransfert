@@ -28,7 +28,7 @@
 
     <div class="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0">
         <div>
-            <a href="/">
+            <a class='py-12' href="/">
                 <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
             </a>
         </div>

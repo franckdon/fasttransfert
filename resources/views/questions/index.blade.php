@@ -54,15 +54,23 @@
                                                     class="inline-flex px-2 text-xs font-semibold leading-5 text-white bg-red-800 rounded-full">
                                                     Obligatoire
                                                 </span>
+                                                @if ($question->document)
+                                                    <span
+                                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-white bg-blue-800 rounded-full">
+                                                        {{ $question->document->name }}
+                                                    </span>
+                                                @endif
                                             @else
                                                 <span
                                                     class="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full">
                                                     Complémentaire
                                                 </span>
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-white bg-blue-800 rounded-full">
-                                                    {{ $question->document->name }}
-                                                </span>
+                                                @if ($question->document)
+                                                    <span
+                                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-white bg-blue-800 rounded-full">
+                                                        {{ $question->document->name }}
+                                                    </span>
+                                                @endif
                                             @endif
                                         </td>
                                         <td class="px-6 py-3 text-left">

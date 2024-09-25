@@ -34,7 +34,7 @@ class MultiStepForm extends Component
     public function mount()
     {
         //$this->reglements = Reglement::all();
-        $this->reglements = Reglement::whereHas('documents', function ($query) {
+        $this->reglements = Reglement::whereHas('questions', function ($query) {
             $query->havingRaw('COUNT(*) > 1');
         })->get();
         $this->demandeurs = User::role('client')->get();
@@ -56,7 +56,7 @@ class MultiStepForm extends Component
             ->get();
 
         $reglement = Reglement::with('documents')->find($value);
-        $this->files = $reglement->documents;
+        $this->files = $reglement->documentsOfQuestionsObligatoires;
 
         $this->files1 = $reglement->documentsOfQuestionsOptionnelles;
 

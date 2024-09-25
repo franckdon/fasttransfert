@@ -10,6 +10,7 @@ use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Storage;
 
 class DemandeController extends Controller implements HasMiddleware
 {
@@ -33,10 +34,10 @@ class DemandeController extends Controller implements HasMiddleware
     public function index()
     {
         if (auth()->user()->hasRole(['superadmin', 'assistance'])) {
-            $demandes = Demande::latest()->paginate(10);
+            $demandes = Demande::latest()->paginate(5);
         }
         if (auth()->user()->hasRole('client')) {
-            $demandes = Demande::where('user_id', auth()->id())->latest()->paginate(10);
+            $demandes = Demande::where('user_id', auth()->id())->latest()->paginate(05);
         }
         return view('demandes.index', compact('demandes'));
     }
@@ -76,5 +77,30 @@ class DemandeController extends Controller implements HasMiddleware
         return response()->json([
             'status' => true
         ]);
+    }
+
+    public function downloadZip($id)
+    {
+        $demande = Demande::findOrFail($id);
+        $zipFileName = 'documents_demande-' . $demande->id . '.zip';
+        $zipFilePath = Storage::disk('public')->path($zipFileName);
+        $documents = $demande->documents;
+
+        $zip = new \ZipArchive();
+
+        if ($zip->open($zipFilePath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== TRUE) {
+            return response()->json(['error' => 'Unable to create ZIP file'], 500);
+        }
+
+        foreach ($documents as $document) {
+            $filePath = $document->pivot->file_path;
+            if ($filePath && file_exists(public_path('storage/' . $filePath))) {
+                $fileNameWithExtension = basename($filePath);
+                $zip->addFile(public_path('storage/' . $filePath), $fileNameWithExtension);
+            }
+        }
+
+        $zip->close();
+        return response()->download($zipFilePath)->deleteFileAfterSend(true);
     }
 }

@@ -33,6 +33,13 @@
                                 <livewire:update-status-popup :demande="$demande" />
                             </div>
                         </div>
+
+                        <span>
+                            <a href="{{ route('demandes.download-zip', $demande->id) }}"
+                                class="inline-block px-4 py-2 mt-4 font-semibold text-white bg-green-500 rounded hover:bg-blue-700">
+                                Télécharger tous les fichiers (ZIP)
+                            </a>
+                        </span>
                     @endif
                 </div>
 

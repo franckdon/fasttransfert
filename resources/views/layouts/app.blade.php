@@ -72,6 +72,36 @@
             <main>
                 {{ $slot }}
             </main>
+
+
+            <div class="py-6 mt-10 text-black bg-white">
+                <div class="px-4 mx-auto max-w-7xl">
+                    <div class="flex flex-col items-center justify-between md:flex-row">
+                        <div class="mb-4 md:mb-0">
+                            <p class="text-sm">
+                                &copy; {{ date('Y') }} <a href="https://www.kfm-consulting.com" target="_blanck">KFM
+                                    CONSULTING</a>. Tous droits réservés.
+                            </p>
+                        </div>
+                        <div>
+                            <ul class="flex space-x-4">
+                                <li>
+                                    <a href="{{ route('contact') }}"
+                                        class="text-gray-400 hover:text-gray-300">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('home') }}" class="text-gray-400 hover:text-gray-300">À propos</a>
+                                </li>
+                                <li>
+                                    <a href="" class="text-gray-400 hover:text-gray-300">Politique de
+                                        confidentialité</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     @livewireScripts

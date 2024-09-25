@@ -30,6 +30,12 @@ class Reglement extends Model
         return $this->hasMany(Question::class)->where('is_required', 0);
     }
 
+    public function documentsOfQuestionsObligatoires()
+    {
+        return $this->hasManyThrough(Document::class, Question::class, 'reglement_id', 'id', 'id', 'document_id')
+            ->where('questions.is_required', 1);
+    }
+
     public function documentsOfQuestionsOptionnelles()
     {
         // return Document::whereHas('questions', function ($query) {

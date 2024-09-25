@@ -41,7 +41,6 @@ class UpdateStatusPopup extends Component
         $demandeur = User::find($this->demande->demandeur->id);
         Notification::send($demandeur, new StatusChanged($this->demande));
 
-        // Fermer le modal après la mise à jour
         $this->open = false;
     }
 

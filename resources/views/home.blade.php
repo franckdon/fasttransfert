@@ -5,7 +5,7 @@
             <!-- Contenu à gauche -->
             <div class="text-center md:w-1/2 md:text-left md:pr-8">
                 <h1 class="mb-4 text-4xl font-bold sm:text-5xl lg:text-6xl">
-                    Bienvenue sur <span class="text-sky-800">MyFastTransfert</span>
+                    Bienvenue sur <span class="text-sky-800">MyFastTransfer</span>
                 </h1>
                 <h2 class="mb-4 text-2xl text-gray-700 sm:text-3xl lg:text-4xl">
                     Sous-titre accrocheur

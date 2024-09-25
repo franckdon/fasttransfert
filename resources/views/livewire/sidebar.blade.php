@@ -1,4 +1,4 @@
-<div class="text-white bg-slate-700">
+<div class="min-h-screen text-white bg-slate-700">
     <div class="w-full p-5 bg-white">
         <a href="{{ route('dashboard') }}">
             <img src="/images/logos/logo.png" alt="Logo" class="h-12">
@@ -76,12 +76,10 @@
         </div>
         @if (auth()->user()->hasRole(['superadmin', 'assistance']))
             <a href="{{ route('reglements.index') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">
-                Gestion
-                règlements
+                Liste des règlements
             </a>
             <a href="{{ route('documents.index') }}" class="p-4 rounded bg-sky-900 hover:bg-sky-950">
-                Gestion
-                documents
+                Liste des documents
             </a>
         @endif
         @if (auth()->user()->hasRole(['superadmin', 'assistance']))

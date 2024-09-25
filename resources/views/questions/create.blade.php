@@ -6,6 +6,7 @@
             </h2>
             <a href="{{ route('reglements.index') }}"
                 class="px-3 py-2 mt-5 ml-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Retour</a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -33,27 +34,26 @@
                             <div class="mt-2">
                                 <label class="inline-flex items-center">
                                     <input type="radio" name="question_type" value="required" class="form-radio"
-                                        {{ old('question_type') == 'required' ? 'checked' : '' }}
-                                        onclick="toggleDocumentSelect()">
+                                        {{ old('question_type') == 'required' ? 'checked' : '' }}>
                                     <span class="ml-2 text-sm text-gray-700">Question obligatoire</span>
                                 </label>
                             </div>
                             <div class="mt-2">
                                 <label class="inline-flex items-center">
                                     <input type="radio" name="question_type" value="complementary" class="form-radio"
-                                        {{ old('question_type') == 'complementary' ? 'checked' : '' }}
-                                        onclick="toggleDocumentSelect()">
+                                        {{ old('question_type') == 'complementary' ? 'checked' : '' }}>
                                     <span class="ml-2 text-sm text-gray-700">Question complémentaire</span>
                                 </label>
+                                @error('question_type')
+                                    <p class="mt-1 text-red-500">{{ $message }}</p>
+                                @enderror
                             </div>
-                            @error('question_type')
-                                <p class="mt-1 text-red-500">{{ $message }}</p>
-                            @enderror
                         </div>
 
-                        <div class="mb-4" id="document_select" style="display: none;">
-                            <label for="document_id" class="block text-sm font-medium text-gray-700">Document
-                                associé à la question</label>
+
+                        <div class="mb-4">
+                            <label for="document_id" class="block text-sm font-medium text-gray-700">Document associé à
+                                la question</label>
                             <select name="document_id" id="document_id"
                                 class="block w-full mt-1 rounded-md shadow-sm form-select">
                                 <option value="">-- Choisir un document --</option>
@@ -68,45 +68,13 @@
                                 <p class="mt-1 text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
-                        <button
-                            class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Ajouter</button>
+
+                        <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+                            Ajouter
+                        </button>
                     </form>
                 </div>
             </div>
-            <x-slot name="script">
-                <script type="text/javascript">
-                    function toggleDocumentSelect() {
-                        var selectedTypeElement = document.querySelector('input[name="question_type"]:checked');
-
-                        if (selectedTypeElement) {
-                            var selectedType = selectedTypeElement.value;
-                            var documentSelect = document.getElementById('document_select');
-                            documentSelect.style.display = (selectedType === 'complementary') ? 'block' : 'none';
-                        }
-                    }
-
-                    // Vérifie que le document est sélectionné si la question est complémentaire
-                    document.querySelector('form').addEventListener('submit', function(e) {
-                        var selectedTypeElement = document.querySelector('input[name="question_type"]:checked');
-
-                        if (selectedTypeElement) {
-                            var selectedType = selectedTypeElement.value;
-                            var documentId = document.getElementById('document_id').value;
-
-                            if (selectedType === 'complementary' && documentId === '') {
-                                e.preventDefault(); // Empêche la soumission du formulaire
-                                alert('Veuillez sélectionner un document pour une question complémentaire.');
-                            }
-                        }
-                    });
-
-                    // Affiche le select document si la case complémentaire est cochée lors du chargement
-                    document.addEventListener("DOMContentLoaded", function() {
-                        toggleDocumentSelect();
-                    });
-                </script>
-            </x-slot>
-
         </div>
     </div>
 </x-app-layout>

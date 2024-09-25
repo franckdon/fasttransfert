@@ -32,8 +32,6 @@
         </div>
 
         <!-- Section 4 : Copyright -->
-        <div class="pt-4 mt-8 text-center text-gray-800 border-t border-gray-700">
-            &copy; 2024 Votre Entreprise. Tous droits réservés.
-        </div>
+        <x-copyrights />
     </div>
 </footer>

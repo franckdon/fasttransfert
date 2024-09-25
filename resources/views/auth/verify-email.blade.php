@@ -15,7 +15,7 @@
 
             <div>
                 <x-primary-button>
-                    {{ __('Resend Verification Email') }}
+                    {{ __('Renvoyer le lien') }}
                 </x-primary-button>
             </div>
         </form>
@@ -25,7 +25,7 @@
 
             <button type="submit"
                 class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
+                {{ __('Se déconecter') }}
             </button>
         </form>
     </div>

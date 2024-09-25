@@ -48,26 +48,20 @@ class QuestionController extends Controller implements HasMiddleware
         $validator = Validator::make($request->all(), [
             'intitule' => 'required',
             'question_type' => 'required',
+            'document_id' => 'required',
 
         ]);
         if ($validator->passes()) {
             $is_required = $request->question_type == 'required' ? 1 : 0;
             $is_complementary = $request->question_type == 'complementary' ? 1 : 0;
-            $document_id = $is_complementary ? $request->document_id : null;
+            $document_id = $request->document_id;
 
-            if ($is_complementary && !$document_id) {
-                dd('here');
-                return redirect()->route('questions.create', $reglement->id)->withErrors('document is required')->withInput();
-            }
-
-            if ($is_complementary && $document_id) {
+            if ($is_required && $document_id || $is_complementary && $document_id) {
                 $documentExist = $reglement->questions()->where('document_id', $document_id)->exists();
-                //dd($documentExist);
                 if ($documentExist) {
                     return redirect()->route('questions.create', $reglement->id)->withErrors('document already exist')->withInput();
                 }
             }
-
             $question = Question::create([
                 'intitule' => $request->intitule,
                 'reglement_id' => $reglement->id,
@@ -95,28 +89,24 @@ class QuestionController extends Controller implements HasMiddleware
     public function update(Request $request, $id)
     {
         $question = Question::findOrFail($id);
+
         $validator = Validator::make($request->all(), [
             'intitule' => 'required',
             'question_type' => 'required',
+            'document_id' => 'required',
 
         ]);
-
         if ($validator->passes()) {
             $is_required = $request->question_type == 'required' ? 1 : 0;
             $is_complementary = $request->question_type == 'complementary' ? 1 : 0;
-            $document_id = $is_complementary ? $request->document_id : null;
+            $document_id = $request->document_id;
 
-            if ($is_complementary && !$document_id) {
-                return redirect()->route('questions.edit', $question->id)->withErrors('document is required')->withInput();
-            }
-
-            if ($is_complementary && $document_id) {
+            if ($is_required && $document_id || $is_complementary && $document_id) {
                 $documentExist = $question->reglement->questions()->where('document_id', $document_id)->exists();
                 if ($documentExist) {
                     return redirect()->route('questions.edit', $question->id)->withErrors('document already exist')->withInput();
                 }
             }
-
             $question->update([
                 'intitule' => $request->intitule,
                 'is_required' => $is_required,
@@ -124,25 +114,10 @@ class QuestionController extends Controller implements HasMiddleware
                 'document_id' => $document_id,
             ]);
 
-            return redirect()->route('questions.index', $question->reglement_id)->with('success', 'Question updated successfully');
+            return redirect()->route('questions.index', $question->reglement->id)->with('success', 'Question updated successfully');
         } else {
             return redirect()->route('questions.edit', $question->id)->withErrors($validator)->withInput();
         }
-
-        // $question = Question::findOrFail($id);
-        // $validator = Validator::make($request->all(), [
-        //     'intitule' => 'required',
-        // ]);
-
-        // if ($validator->passes()) {
-        //     $question->update([
-        //         'intitule' => $request->intitule,
-        //     ]);
-
-        //     return redirect()->route('questions.index', $question->reglement_id)->with('success', 'Question updated successfully');
-        // } else {
-        //     return redirect()->route('questions.edit', $question->id)->withErrors($validator)->withInput();
-        // }
     }
 
     public function destroy(Request $request)

@@ -116,6 +116,7 @@ Route::middleware('auth')->group(function () {
     route::get('/demandes/{id}/edit', [DemandeController::class, 'edit'])->name('demandes.edit');
     route::post('/demandes/{id}', [DemandeController::class, 'update'])->name('demandes.update');
     route::delete('/demandes/', [DemandeController::class, 'destroy'])->name('demandes.destroy');
+    route::get('/demandes/{id}/download-zip', [DemandeController::class, 'downloadZip'])->name('demandes.download-zip');
 
     route::get('/domaines/', [DomaineController::class, 'index'])->name('domaines.index');
     route::get('/domaines/create', [DomaineController::class, 'create'])->name('domaines.create');
